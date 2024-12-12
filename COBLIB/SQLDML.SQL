@@ -1,0 +1,156 @@
+------------------------------------------------------------------------
+-- ELIMINACAO DOS DADOS DAS TABELAS                                     
+------------------------------------------------------------------------
+--   DELETE FROM FUNCIONARIOS;                                          
+--   DELETE FROM DEPARTAMENTOS;                                         
+------------------------------------------------------------------------
+-- INSERCAO DE DEPARTAMENTOS                                            
+------------------------------------------------------------------------
+--   INSERT INTO DEPARTAMENTOS                                          
+--       VALUES ( 'ADM',                                                
+--                'ADMINISTRACAO' );                                    
+--                                                                      
+--   INSERT INTO DEPARTAMENTOS                                          
+--       VALUES ( 'RH',                                                 
+--                'RELACOES HUMANAS' );                                 
+------------------------------------------------------------------------
+-- INSERCAO DE FUNCIONARIOS                                             
+------------------------------------------------------------------------
+--   INSERT INTO FUNCIONARIOS ( CODFUN,                                 
+--                              NOMEFUN,                                
+--                              SALARIOFUN,                             
+--                              DEPTOFUN,                               
+--                              ADMISSFUN,                              
+--                              IDADEFUN                                
+--   ) VALUES ( 'DD88',                                                 
+--              'SEM EMAIL',                                            
+--              1234.55,                                                
+--              'ADM',                                                  
+--              '2010-06-06',                                           
+--              25 );                                                   
+------------------------------------------------------------------------
+--   INSERT INTO FUNCIONARIOS                                           
+--       VALUES ( 'AA01',                                               
+--                'JOSE DA SILVA',                                      
+--                1210.45,                                              
+--                'ADM',                                                
+--                '2013-12-01',                                         
+--                20,                                                   
+--                'JOSE@EMAIL.COM.BR' );                                
+--                                                                      
+--   INSERT INTO FUNCIONARIOS                                           
+--       VALUES ( 'AA88',                                               
+--                'RENATA SA',                                          
+--                2455.50,                                              
+--                'ADM',                                                
+--                '1995-11-11',                                         
+--                35,                                                   
+--                'RENATA@EMAIL.COM.BR' );                              
+--                                                                      
+--   INSERT INTO FUNCIONARIOS                                           
+--       VALUES ( 'BW02',                                               
+--                'MARIA FERNANDA',                                     
+--                2832.32,                                              
+--                'RH',                                                 
+--                '2009-02-22',                                         
+--                25,                                                   
+--                'MARIA@EMAIL.COM.BR' );                               
+--                                                                      
+--   INSERT INTO FUNCIONARIOS                                           
+--       VALUES ( 'AA02',                                               
+--                'ANTONIO PEIXOTO',                                    
+--                832.32,                                               
+--                'RH',                                                 
+--                '1995-05-05',                                         
+--                22,                                                   
+--                'ANTONIO@EMAIL.COM.BR' );                             
+------------------------------------------------------------------------
+-- SELECAO DE FUNCIONARIOS                                              
+------------------------------------------------------------------------
+--   SELECT * FROM FUNCIONARIOS;                                        
+--                                                                      
+--   SELECT NOMEFUN, SALARIOFUN                                         
+--       FROM FUNCIONARIOS                                              
+--       WHERE   SALARIOFUN > 1000                                      
+--       ORDER BY NOMEFUN;                                              
+--                                                                      
+--   SELECT NOMEFUN, SALARIOFUN, ADMISSFUN                              
+--       FROM FUNCIONARIOS                                              
+--       WHERE   ADMISSFUN BETWEEN '2000-01-01' AND '2010-12-31'        
+--       ORDER BY NOMEFUN;                                              
+--                                                                      
+--   SELECT NOMEFUN, SALARIOFUN, IDADEFUN                               
+--       FROM FUNCIONARIOS                                              
+--       WHERE   IDADEFUN IN (20, 22)                                   
+--       ORDER BY NOMEFUN;                                              
+--                                                                      
+--   SELECT NOMEFUN, SALARIOFUN                                         
+--       FROM FUNCIONARIOS                                              
+--       WHERE   NOMEFUN LIKE '%T%'                                     
+--       ORDER BY NOMEFUN DESC;                                         
+------------------------------------------------------------------------
+-- FUNCOES DO SQL                                                       
+------------------------------------------------------------------------
+--   SELECT SUM(SALARIOFUN) AS "SOMA SALARIOS ADM"                      
+--       FROM FUNCIONARIOS                                              
+--       WHERE   DEPTOFUN = 'ADM';                                      
+--                                                                      
+--   SELECT DEPTOFUN, SUM(SALARIOFUN) AS "SOMA SALARIOS"                
+--       FROM FUNCIONARIOS                                              
+--       GROUP   BY DEPTOFUN;                                           
+------------------------------------------------------------------------
+-- JUNCOES                                                              
+------------------------------------------------------------------------
+--   SELECT A.NOMEFUN, B.NOMEDEPTO, A.SALARIOFUN                        
+--       FROM FUNCIONARIOS A                                            
+--       INNER JOIN DEPARTAMENTOS B                                     
+--            ON A.DEPTOFUN = B.CODDEPTO                                
+--       WHERE   SALARIOFUN > 1000                                      
+--       ORDER BY NOMEFUN;                                              
+------------------------------------------------------------------------
+-- SUB-QUERIES                                                          
+------------------------------------------------------------------------
+--   SELECT NOMEFUN, SALARIOFUN                                         
+--       FROM FUNCIONARIOS                                              
+--       WHERE   DEPTOFUN = 'ADM'                                       
+--           AND SALARIOFUN > ( SELECT AVG(SALARIOFUN)                  
+--                                  FROM FUNCIONARIOS                   
+--                                  WHERE   DEPTOFUN = 'RH' )           
+--       ORDER BY NOMEFUN;                                              
+--                                                                      
+--   SELECT NOMEFUN, SALARIOFUN                                         
+--       FROM FUNCIONARIOS                                              
+--       WHERE   DEPTOFUN = 'ADM'                                       
+--           AND SALARIOFUN > ALL ( SELECT SALARIOFUN                   
+--                                      FROM FUNCIONARIOS               
+--                                      WHERE   DEPTOFUN = 'RH' )       
+--       ORDER BY NOMEFUN;                                              
+--                                                                      
+--   SELECT NOMEFUN, SALARIOFUN                                         
+--       FROM FUNCIONARIOS                                              
+--       WHERE   DEPTOFUN = 'ADM'                                       
+--           AND SALARIOFUN > ANY ( SELECT SALARIOFUN                   
+--                                      FROM FUNCIONARIOS               
+--                                      WHERE   DEPTOFUN = 'RH' )       
+--       ORDER BY NOMEFUN;                                              
+--                                                                      
+--   SELECT NOMEFUN, SALARIOFUN                                         
+--       FROM FUNCIONARIOS                                              
+--       WHERE   DEPTOFUN = 'ADM'                                       
+--           AND EXISTS ( SELECT SALARIOFUN                             
+--                            FROM FUNCIONARIOS                         
+--                            WHERE   DEPTOFUN   = 'RH'                 
+--                                AND SALARIOFUN > 1000 )               
+--       ORDER BY NOMEFUN;                                              
+------------------------------------------------------------------------
+-- UPDATE                                                               
+------------------------------------------------------------------------
+--   UPDATE FUNCIONARIOS                                                
+--       SET SALARIOFUN = 1000                                          
+--       WHERE   CODFUN = 'BB05';                                       
+------------------------------------------------------------------------
+-- DELETE                                                               
+------------------------------------------------------------------------
+--   DELETE FROM FUNCIONARIOS                                           
+--       WHERE   CODFUN = 'BB05';                                       
+--

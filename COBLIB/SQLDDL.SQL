@@ -1,0 +1,40 @@
+------------------------------------------------------------------------
+-- ELIMINACAO DAS TABELAS
+------------------------------------------------------------------------
+--   DROP TABLE FUNCIONARIOS;
+--   DROP TABLE DEPARTAMENTOS;
+------------------------------------------------------------------------
+-- CRIACAO DA TABELA DE DEPARTAMENTOS
+------------------------------------------------------------------------
+--   CREATE TABLE DEPARTAMENTOS (
+--       CODDEPTO  CHAR(3)     PRIMARY KEY NOT NULL,
+--       NOMEDEPTO VARCHAR(30)             NOT NULL
+--   );
+------------------------------------------------------------------------
+-- CRIACAO DA TABELA DE FUNCIONARIOS
+------------------------------------------------------------------------
+--   CREATE TABLE FUNCIONARIOS (
+--       CODFUN     CHAR(4)       PRIMARY KEY NOT NULL,
+--       NOMEFUN    VARCHAR(30)               NOT NULL,
+--       SALARIOFUN DECIMAL(8, 2)             NOT NULL,
+--       DEPTOFUN   CHAR(3)                   NOT NULL,
+--       ADMISSFUN  DATE                      NOT NULL,
+--       IDADEFUN   SMALLINT                  NOT NULL,
+--       EMAILFUN   VARCHAR(30)
+--   );
+------------------------------------------------------------------------
+-- CRIACAO DOS INICES DAS TABELAS
+------------------------------------------------------------------------
+--   CREATE UNIQUE INDEX IDXFUNC
+--       ON FUNCIONARIOS(CODFUN);
+--
+--   CREATE UNIQUE INDEX IDXDEPTO
+--       ON DEPARTAMENTOS(CODDEPTO);
+------------------------------------------------------------------------
+-- CRIACAO DAS FOREIGN KEYS
+------------------------------------------------------------------------
+--   ALTER TABLE FUNCIONARIOS
+--       ADD FOREIGN KEY (DEPTOFUN)
+--       REFERENCES DEPARTAMENTOS(CODDEPTO)
+--       ON DELETE RESTRICT;
+------------------------------------------------------------------------
